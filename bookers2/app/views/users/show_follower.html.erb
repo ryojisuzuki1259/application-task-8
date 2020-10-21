@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-3">
+      <h2>User info</h2>
+  		<%= render 'users/profile', user: @user %>
+
+	  	<h2>New book</h2>
+	  	<%= render 'books/form', book: @new %>
+    </div>
+
+    <div class="col-xs-9">
+      <h2>Followers</h2>
+      <% @user.followers.each do |user| %>
+      <table>
+        <tr>
+          <td>  <%= user.name %> </td>
+          <td><%= link_to 'Show', user_path(user) %></td>
+        </tr>
+      </table>
+      <% end %>
+    </div>
+  </div>
+</div>
