@@ -1,0 +1,33 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <nav class='nav navbar-nav navbar-left' >
+      <span>Bookers</span>
+    </nav>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li><%= link_to ' Home', user_path(current_user), class: 'glyphicon glyphicon-home home' %></li>
+          <li><%= link_to ' Users', users_path, class: 'glyphicon glyphicon-user users' %></li>
+          <li><%= link_to ' Books', books_path, class: 'glyphicon glyphicon-book books'%></li>
+          <li><%= link_to ' logout', destroy_user_session_path, method: :delete, class: 'glyphicon glyphicon-log-out logout' %></li>
+        <% else %>
+          <li><%= link_to ' Home', root_path, class: 'glyphicon glyphicon-home home' %></li>
+          <li><%= link_to ' About', about_path, class: 'glyphicon glyphicon-link about' %></li>
+          <li><%= link_to ' sign up', new_user_registration_path, class: 'glyphicon glyphicon-edit sign_up' %></li>
+          <li><%= link_to ' login', new_user_session_path, class: 'glyphicon glyphicon-log-in sign_in'%></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+  
+</header>
+<div class ="search">
+    <% if user_signed_in? %>
+    <%= form_with url:search_path, method: :get, local:true do |f| %>
+    　<%= f.text_field :word %>
+      <%= f.select :range, [['User', '1'], ['Book', '2']] %>
+      <%= f.select :'search', [["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]] %>
+      <%= f.submit "検索" %>
+    <% end %>
+    <% end %>
+  </div>
